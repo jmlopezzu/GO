@@ -1,0 +1,87 @@
+Welcome
+Welcome to the learn-golang.org interactive Go tutorial.
+
+Whether you are an experienced programmer or not, this website is intended for everyone who wishes to learn the Go programming language.
+
+Just click on the chapter you wish to begin from, and follow the instructions. Good luck!
+
+learn-golang.org is still under construction - If you wish to contribute tutorials, please click on Contributing Tutorials down below.
+
+Learn the Basics
+Hello, World!
+Variables
+Arrays
+Slices
+If-Else
+Loops
+Functions
+The fmt module
+Contributing Tutorials
+Read more here: Contributing Tutorials
+
+---------------------------------------
+
+Install Go using Homebrew on macOS. 
+
+Steps:
+
+### Step 1: Install Homebrew (if not already installed)
+
+If you don't have Homebrew installed, you can install it by running the following command in your terminal:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Follow the on-screen instructions to complete the installation.
+
+### Step 2: Install Go using Homebrew
+
+Once Homebrew is installed, you can use it to install Go. Run the following command in your terminal:
+
+```bash
+brew install go
+```
+
+This will download and install the latest version of Go on your system.
+
+### Step 3: Verify the Go Installation
+
+After the installation is complete, you can verify that Go has been installed correctly by checking its version. Run the following command:
+
+```bash
+go version
+```
+
+You should see output similar to this, indicating the installed Go version:
+
+```bash
+go version goX.X.X darwin/amd64
+```
+
+Now, you have Go installed on your macOS system using Homebrew.
+
+### Step 4: Set Up Your Go Workspace (Optional)
+
+Go has a recommended directory structure for your workspace. You can set the `GOPATH` environment variable to specify the root of your workspace. Additionally, you can add the `bin` directory to your `PATH` to make Go binaries easily executable.
+
+Add the following lines to your shell profile file (e.g., `.bashrc`, `.zshrc`, or `.bash_profile`):
+
+```bash
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+```
+
+Then, restart your terminal or run `source ~/.bashrc` (or the appropriate file for your shell) to apply the changes.
+
+### Step 5: Verify Go Environment
+
+You can also verify that your Go environment is set up correctly by running:
+
+```bash
+go env
+```
+
+This command will display various Go environment variables.
+
+Now you're ready to start working with Go on your macOS system! You can use Visual Studio Code or any other text editor to write and run your Go programs.
