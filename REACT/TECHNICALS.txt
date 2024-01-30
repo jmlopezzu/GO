@@ -1,0 +1,128 @@
+I apologize for any confusion. It looks like you've made some changes to the Go backend code, including adding logging and error handling. I appreciate the clarification. Here's the updated combined code for both the Go backend and the React frontend:
+
+### Go Backend (main.go):
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"log"
+	"net/http"
+)
+
+type Item struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Price int    `json:"price"`
+}
+
+var items = []Item{
+	{ID: 1, Name: "Item 1", Price: 20},
+	{ID: 2, Name: "Item 2", Price: 30},
+}
+
+func main() {
+	http.HandleFunc("/api/items", getItems)
+	// Add other handlers here if needed...
+
+	serverAddr := ":8080"
+	log.Printf("Server AZEN is running on http://localhost%s\n", serverAddr)
+	if err := http.ListenAndServe(serverAddr, nil); err != nil {
+		log.Fatalf("Error starting server: %s", err)
+	}
+}
+
+func getItems(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	err := json.NewEncoder(w).Encode(items)
+	if err != nil {
+		log.Printf("Error encoding JSON: %s", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+}
+```
+
+### React Frontend (ItemListComponent.js):
+
+```jsx
+// ItemListComponent.js
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const ItemListComponent = () => {
+	const [items, setItems] = useState([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await axios.get('http://localhost:8080/api/items');
+				setItems(response.data);
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+		};
+
+		fetchData();
+	}, []);
+
+	return (
+		<div>
+			<h1>Items</h1>
+			<ul>
+				{items.map(item => (
+					<li key={item.ID}>
+						{item.Name} - ${item.Price}
+					</li>
+				))}
+			</ul>
+		</div>
+	);
+};
+
+export default ItemListComponent;
+```
+
+### Instructions:
+
+1. **Run the Go Backend:**
+   - Save the Go code in a file named `main.go`.
+   - Open a terminal and navigate to the directory containing `main.go`.
+   - Run the Go backend:
+
+     ```bash
+     go run main.go
+     ```
+
+   - Your Go backend should be running at [http://localhost:8080](http://localhost:8080).
+
+2. **Create a New React App:**
+   - Open a new terminal and navigate to the directory where you want to create your React app.
+   - Run the following commands to create a new React app:
+
+     ```bash
+     npx create-react-app my-react-app
+     cd my-react-app
+     ```
+
+3. **Install Axios:**
+   - Inside the React app directory (`my-react-app`), install Axios:
+
+     ```bash
+     npm install axios
+     ```
+
+4. **Replace App.js with ItemListComponent.js:**
+   - Replace the content of `src/App.js` with the content of `ItemListComponent.js`.
+
+5. **Run the React App:**
+   - Start the React app:
+
+     ```bash
+     npm start
+     ```
+
+   - Visit [http://localhost:3000](http://localhost:3000) to see your React app fetching and displaying data from your Go backend.
+
+Now, you have a basic connection between your Go backend and React frontend, including the additional logging and error handling you've added to the Go backend. If you have further questions or encounter any issues, feel free to ask!
